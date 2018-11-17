@@ -2,4 +2,21 @@
     <string name="app_name">MyPet</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="usuarioinvalido">Correo o contraseña invalido</string>
+    <string name="cargando">Cargando</string>
+    <string name="iniciando">Iniciando</string>
+    <string name="camposvacios">Rellene campos vacios</string>
+    <string name="longitudinvalida">Clave debe contener mas de 6 caracteres</string>
+    <string name="registamdo">Registrando</string>
+    <string name="usuarioyaexiste">Usuario ya existe</string>
+    <string name="registrado">Registrado</string>
+    <string name="errorregistrando">Error registrando</string>
+    <string name="contraseñanocoinciden">Contraseñas no coinciden</string>
+    <string name="revisecorreo">Revise su correo</string>
+    <string name="error">Ocurrio un error</string>
+    <string name="perfil">Perfil</string>
+    <string name="donacion">Donacion</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="configuracion">Configuracion</string>
+    <string name="cerrarsesion">Cerrar sesion</string>
 </resources>

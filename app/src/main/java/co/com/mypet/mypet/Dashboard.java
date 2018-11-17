@@ -1,6 +1,8 @@
 package co.com.mypet.mypet;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -30,6 +32,8 @@ public class Dashboard extends AppCompatActivity {
     private ArrayList<Mascota> mascotas;
     private DatabaseReference databaseReference;
     private String db = "Mascotas";
+    private ProgressDialog progressDialog;
+    private Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +43,20 @@ public class Dashboard extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         recyclerView = findViewById(R.id.lista);
+        resources = this.getResources();
         mascotas = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
         //mascotas.add(new Mascota("1","Princesa","Chanda","Barranquilla","1 mes","para adopcion","https://firebasestorage.googleapis.com/v0/b/mypet-850a1.appspot.com/o/Miniature-Pinscher-On-White-01.jpg?alt=media&token=18898303-24a5-45f4-a7bd-1c405595b509"));
         final MascotaAdapter mascotaAdapter = new MascotaAdapter(mascotas, this);
-
+        progressDialog.setMessage(resources.getString(R.string.cargando));
+        progressDialog.show();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         databaseReference.child(db).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mascotas.clear();
+
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                         Mascota p = snapshot.getValue(Mascota.class);
@@ -56,6 +64,7 @@ public class Dashboard extends AppCompatActivity {
                     }
                 }
                 mascotaAdapter.notifyDataSetChanged();
+                progressDialog.dismiss();
                 Datos.setMascotas(mascotas);
             }
 

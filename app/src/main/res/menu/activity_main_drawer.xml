@@ -6,28 +6,28 @@
             android:id="@+id/profile"
             android:checked="true"
             android:icon="@mipmap/ic_profile"
-            android:title="Perfil" />
+            android:title="@string/perfil" />
 
         <item
             android:id="@+id/donacion"
             android:checked="true"
             android:icon="@mipmap/ic_donacion"
-            android:title="Donación" />
+            android:title="@string/donacion" />
 
         <item
             android:id="@+id/help"
             android:icon="@mipmap/ic_help"
-            android:title="Ayuda" />
+            android:title="@string/ayuda" />
 
         <!-- Otra sección -->
         <item
             android:id="@+id/otra_section"
-            android:title="Configuracion">
+            android:title="@string/configuracion">
             <menu>
                 <item
                     android:id="@+id/logout"
                     android:icon="@mipmap/ic_logout"
-                    android:title="Cerrar sesion" />
+                    android:title="@string/cerrarsesion" />
             </menu>
         </item>
     </group>
