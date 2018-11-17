@@ -3,6 +3,7 @@ package co.com.mypet.mypet;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -29,16 +30,20 @@ public class Login extends Activity {
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
+    private Resources resources;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        resources = this.getResources();
         recuperar = findViewById(R.id.tvRecuperarPassword);
         registrar = findViewById(R.id.tvRegistrarUser);
         btLogIn = findViewById(R.id.btLogIn);
         txtemail = findViewById(R.id.etUserLogin);
         txtpass = findViewById(R.id.etPasswordLogin);
         firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
         recuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,18 +68,21 @@ public class Login extends Activity {
                 String email = txtemail.getText().toString().trim();
                 String pass = txtpass.getText().toString().trim();
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)){
-                    Toast.makeText(getApplicationContext(), "Rellene campo vacio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), resources.getString(R.string.camposvacios), Toast.LENGTH_SHORT).show();
                 }else {
-                    progressDialog.setMessage("Iniciando");
+                    progressDialog.setMessage(resources.getString(R.string.iniciando));
                     progressDialog.show();
                     firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                progressDialog.dismiss();
                                 Intent i = new Intent(Login.this,Dashboard.class);
                                 startActivity(i);
+                                finish();
                             }else {
-                                Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(),resources.getString(R.string.usuarioinvalido), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

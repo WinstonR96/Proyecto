@@ -1,7 +1,9 @@
 package co.com.mypet.mypet;
 
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,14 +24,14 @@ public class RegistroUsuario extends AppCompatActivity {
     private EditText txtEmail, txtPass, txtRePass;
     private Button btnRegistrar;
     private ProgressDialog progressDialog;
-
+    private Resources resources;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
-
+        resources = this.getResources();
         firebaseAuth = FirebaseAuth.getInstance();
 
         txtEmail = findViewById(R.id.etEmailRe);
@@ -44,27 +46,35 @@ public class RegistroUsuario extends AppCompatActivity {
                 String email = txtEmail.getText().toString().trim();
                 String pass = txtPass.getText().toString().trim();
                 String repass = txtRePass.getText().toString().trim();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(repass)){
-                    Toast.makeText(getApplicationContext(), "Rellene campo vacio", Toast.LENGTH_SHORT).show();
-                }else {
-                    if (pass.equals(repass)) {
-                        progressDialog.setMessage("Registrando");
-                        progressDialog.show();
-                        firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    if(task.getException() instanceof FirebaseAuthUserCollisionException){//Si encuentra el correo
-                                        Toast.makeText(getApplicationContext(),"Usuario ya existe",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(repass)) {
+                    Toast.makeText(getApplicationContext(), resources.getString(R.string.camposvacios), Toast.LENGTH_SHORT).show();
+                } else {
+                    if (pass.length() <= 6) {
+                        Toast.makeText(getApplicationContext(), resources.getString(R.string.longitudinvalida), Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (pass.equals(repass)) {
+                            progressDialog.setMessage(resources.getString(R.string.registamdo));
+                            progressDialog.show();
+                            firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {//Si encuentra el correo
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getApplicationContext(),resources.getString(R.string.usuarioyaexiste), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), resources.getString(R.string.registrado), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), resources.getString(R.string.errorregistrando), Toast.LENGTH_SHORT).show();
                                     }
-                                    Toast.makeText(getApplicationContext(),"Registrado",Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(getApplicationContext(),"No se pudo registrar", Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        });
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Contraseña no coindicen", Toast.LENGTH_SHORT).show();
+                            });
+                        } else {
+                            Toast.makeText(getApplicationContext(), resources.getString(R.string.contraseñanocoinciden), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                 }
