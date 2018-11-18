@@ -21,6 +21,10 @@ class Usuario {
         this.segundoNombre = segundoNombre;
     }
 
+    public Usuario(String id){
+        this.id = id;
+    }
+
     public String getFoto() {
         return foto;
     }
@@ -67,5 +71,9 @@ class Usuario {
 
     public void setSegundoNombre(String segundoNombre) {
         this.segundoNombre = segundoNombre;
+    }
+
+    public void guardar(){
+        Datos.agregarUsuario(this);
     }
 }
