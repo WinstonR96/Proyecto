@@ -34,4 +34,5 @@
     <string name="iniciarS">Iniciar Sesion</string>
     <string name="mensajeolvido">¿Olvido su contraseña? Recuperela!</string>
     <string name="mensajeregistrese">¿No tiene una cuenta? Registrese!</string>
+    <string name="seleccionarFoto">Seleccionar Foto</string>
 </resources>

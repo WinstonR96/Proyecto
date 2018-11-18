@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +35,7 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
     private ImageView foto;
     private FirebaseUser user;
     private FirebaseAuth auth;
+    private Uri uri;
     private String nombreU, emailU, fotoU,snombreU,sapellidoU,apellidoU;
     SharedPreferences sharedPreferences;
     private CircleImageView foto_profile_U;
@@ -87,7 +89,35 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        foto_profile_U.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                seleccionar_foto();
+            }
+        });
+
     }
+    public void seleccionar_foto(){
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i,
+                getResources().getString(R.string.seleccionarFoto)),1);
+    }
+    protected void onActivityResult(int requesCode,int resultCode,Intent data){
+        super.onActivityResult(requesCode,resultCode,data);
+
+        if(requesCode==1){
+            uri = data.getData();
+
+            if(uri != null){
+                foto.setImageURI(uri);
+
+            }
+        }
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -145,7 +175,7 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
     private void logout() {
         auth.signOut();
         SharedPreferences.Editor editor = getSharedPreferences("userInfo",Context.MODE_PRIVATE).edit();
-        editor.putString("Estado_Conexion", "");
+        editor.clear();
         editor.apply();
         Intent intent = new Intent(this,Login.class);
         startActivity(intent);

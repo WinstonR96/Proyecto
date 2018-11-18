@@ -214,7 +214,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private void logout() {
         auth.signOut();
         SharedPreferences.Editor editor = getSharedPreferences("userInfo",Context.MODE_PRIVATE).edit();
-        editor.putString("Estado_Conexion", "");
+        editor.clear();
         editor.apply();
         Intent intent = new Intent(this,Login.class);
         startActivity(intent);
