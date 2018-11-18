@@ -78,14 +78,18 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
 
         nombre.setText(nombreU);
         email.setText(emailU);
-        Glide.with(getApplicationContext()).load(fotoU).into(foto);
+        if(!fotoU.isEmpty()){
+            Glide.with(getApplicationContext()).load(fotoU).into(foto);
+            Glide.with(getApplicationContext()).load(fotoU).into(foto_profile_U);
+        }
+            
 
         txtDisplayName.setText(nombreU);
         txtEmailPerfil.setText(emailU);
         txtApellidoPerfil.setText(apellidoU);
         txtSegundoApellidoPerfil.setText(sapellidoU);
         txtSegundoNombrePerfil.setText(snombreU);
-        Glide.with(getApplicationContext()).load(fotoU).into(foto_profile_U);
+
 
         navigationView.setNavigationItemSelectedListener(this);
 
