@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.com.bucompany.puppycare.LoginActivity">
+    tools:context="co.com.mypet.mypet.Login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:textSize="40dp"
             android:layout_gravity="center"
             android:textColor="@color/negro"
-            android:text="Inicie Sesion"/>
+            android:text="@string/iniciar"/>
 
         <Space
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:textColorHint="@color/negro"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:hint="Ingrese Email" />
+            android:hint="@string/ingreseemail" />
 
         <Space
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:ems="10"
             android:gravity="center"
             android:textColorHint="@color/negro"
-            android:hint="Ingrese Contraseña"
+            android:hint="@string/ingresecontrasena"
             android:inputType="textPassword" />
 
         <Space
@@ -69,7 +69,7 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:background="@drawable/button_bg"
-            android:text="Iniciar" />
+            android:text="@string/iniciarS" />
 
         <Space
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Olvido su contraseña? Recuperela!"
+            android:text="@string/mensajeolvido"
             android:textColor="@color/colorPrimary" />
 
         <Space
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="¿No tiene una cuenta? Registrese!"
+            android:text="@string/mensajeregistrese"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 

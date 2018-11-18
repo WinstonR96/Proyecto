@@ -16,18 +16,32 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="30dp"/>
+        android:layout_height="10dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
+        android:id="@+id/foto_profile_U"
         android:src="@mipmap/ic_profile"
         />
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="30dp"/>
+        android:layout_height="10dp"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:editable="false"
+        android:enabled="false"
+        android:id="@+id/txtEmailPerfil"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -37,17 +51,37 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="30dp"/>
+        android:layout_height="10dp"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/txtEmailPerfil"/>
+        android:id="@+id/txtSegundoNombrePerfil"/>
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="30dp"/>
+        android:layout_height="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/txtApellidoPerfil"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/txtSegundoApellidoPerfil"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
 
     <Button
         android:layout_width="wrap_content"

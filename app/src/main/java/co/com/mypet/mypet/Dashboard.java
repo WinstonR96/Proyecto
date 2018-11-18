@@ -1,8 +1,10 @@
 package co.com.mypet.mypet;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -50,6 +52,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private ImageView foto;
     private FirebaseUser user;
     private FirebaseAuth auth;
+    private Usuario u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,11 +124,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        Usuario usuario = snapshot.getValue(Usuario.class);
-                        if(usuario.getId().equals(user.getUid())){
-                            nombre.setText(usuario.getNombre());
+                        u = snapshot.getValue(Usuario.class);
+                        if(u.getId().equals(user.getUid())){
+                            nombre.setText(u.getNombre());
                             email.setText(user.getEmail());
-                            Glide.with(getApplicationContext()).load(usuario.getFoto()).into(foto);
+                            Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
                             break;
                         }
                     }
@@ -164,17 +167,57 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     private void perfil() {
+        guardarDatosUsuario();
         Intent i = new Intent(this,Perfil.class);
         startActivity(i);
     }
 
+    public void guardarDatosUsuario(){
+        SharedPreferences.Editor editor = getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
+        editor.putString("nombre",u.getNombre());
+        editor.putString("email", user.getEmail());
+        editor.putString("foto", u.getFoto());
+        editor.putString("segundonombre",u.getSegundoNombre());
+        editor.putString("segundoapellido",u.getSegundoApellido());
+        editor.putString("apellido",u.getPrimerApellido());
+        editor.apply();
+
+    }
+
     private void logoutRequest() {
+        String positivo, negativo;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.cerrarsesion));
+        builder.setMessage(getResources().getString(R.string.mensaje_cerrar));
+        positivo = getResources().getString(R.string.si);
+        negativo = getResources().getString(R.string.no);
+
+        builder.setPositiveButton(positivo, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                logout();
+            }
+        });
+
+        builder.setNegativeButton(negativo, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        }) ;
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void logout() {
         auth.signOut();
         SharedPreferences.Editor editor = getSharedPreferences("userInfo",Context.MODE_PRIVATE).edit();
         editor.putString("Estado_Conexion", "");
         editor.apply();
-        Intent i = new Intent(this,Login.class);
-        startActivity(i);
+        Intent intent = new Intent(this,Login.class);
+        startActivity(intent);
         finish();
     }
 }
