@@ -2,7 +2,9 @@ package co.com.mypet.mypet;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +28,7 @@ public class Login extends Activity {
     private EditText txtemail, txtpass;
     private TextView recuperar, registrar;
     private Button btLogIn;
-
+    private SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
@@ -36,6 +38,7 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        obtenerSharedPreferences();
         resources = this.getResources();
         recuperar = findViewById(R.id.tvRecuperarPassword);
         registrar = findViewById(R.id.tvRegistrarUser);
@@ -76,6 +79,7 @@ public class Login extends Activity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                guardarSharedPreferences("Conectado");
                                 progressDialog.dismiss();
                                 Intent i = new Intent(Login.this,Dashboard.class);
                                 startActivity(i);
@@ -90,6 +94,24 @@ public class Login extends Activity {
 
             }
         });
+    }
+
+
+    public void obtenerSharedPreferences(){
+        sharedPreferences = getSharedPreferences("userInfo",Context.MODE_PRIVATE);
+        String estado = sharedPreferences.getString("Estado_Conexion"," ");
+        if(estado.equals(("Conectado"))){
+            Intent i = new Intent(this, Dashboard.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
+    public void guardarSharedPreferences(String estado){
+        SharedPreferences.Editor editor = getSharedPreferences("userInfo", MODE_PRIVATE).edit();
+        editor.putString("Estado_Conexion", estado);
+        editor.apply();
+
     }
 
 

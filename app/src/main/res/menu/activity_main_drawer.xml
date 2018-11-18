@@ -4,13 +4,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/profile"
-            android:checked="true"
             android:icon="@mipmap/ic_profile"
             android:title="@string/perfil" />
 
         <item
             android:id="@+id/donacion"
-            android:checked="true"
             android:icon="@mipmap/ic_donacion"
             android:title="@string/donacion" />
 

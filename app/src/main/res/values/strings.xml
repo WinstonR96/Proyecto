@@ -19,4 +19,19 @@
     <string name="ayuda">Ayuda</string>
     <string name="configuracion">Configuracion</string>
     <string name="cerrarsesion">Cerrar sesion</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="mensaje_cerrar">¿Desea cerrar sesion?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="registrese">Registrese</string>
+    <string name="ingreseemail">Ingrese Email</string>
+    <string name="ingresecontrasena">Ingrese contraseña</string>
+    <string name="repitacontrasena">Repita Contraseña</string>
+    <string name="registrar">Registrar</string>
+    <string name="recuperepass">Recupere Contraseña</string>
+    <string name="recuperar">Recuperar</string>
+    <string name="iniciar">Iniciar Sesion</string>
+    <string name="iniciarS">Iniciar Sesion</string>
+    <string name="mensajeolvido">¿Olvido su contraseña? Recuperela!</string>
+    <string name="mensajeregistrese">¿No tiene una cuenta? Registrese!</string>
 </resources>
