@@ -40,6 +40,7 @@ public class RecuperarPassword extends Activity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
+                                limpiar();
                                 Toast.makeText(getApplicationContext(),resources.getString(R.string.revisecorreo),Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(getApplicationContext(),resources.getString(R.string.error),Toast.LENGTH_SHORT).show();
@@ -49,5 +50,9 @@ public class RecuperarPassword extends Activity {
                 }
             }
         });
+    }
+
+    public void limpiar(){
+        etEmailRecuperar.setText(null);
     }
 }

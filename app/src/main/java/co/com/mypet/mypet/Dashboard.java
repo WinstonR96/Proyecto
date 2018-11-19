@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -119,13 +120,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        databaseReference.child(dbUser).addValueEventListener(new ValueEventListener() {
+        /*databaseReference.child(dbUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
                         u = snapshot.getValue(Usuario.class);
-                        if(u.getId().equals(user.getUid())){
+                        if (u.getId().equals(user.getUid())) {
+                            String uid = snapshot.getKey();
+                            Toast.makeText(getApplicationContext(), "Esta es el Id: " + uid, Toast.LENGTH_SHORT).show();
                             nombre.setText(u.getNombre());
                             email.setText(user.getEmail());
                             Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
@@ -142,8 +146,24 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
+        databaseReference.child(dbUser).child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    u = dataSnapshot.getValue(Usuario.class);
+                    String uid = dataSnapshot.getKey();
+                    nombre.setText(u.getNombre());
+                    email.setText(user.getEmail());
+                    Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
+                    }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         }
 
 
@@ -214,7 +234,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private void logout() {
         auth.signOut();
         SharedPreferences.Editor editor = getSharedPreferences("userInfo",Context.MODE_PRIVATE).edit();
-        editor.putString("Estado_Conexion", "");
+        editor.clear();
         editor.apply();
         Intent intent = new Intent(this,Login.class);
         startActivity(intent);
