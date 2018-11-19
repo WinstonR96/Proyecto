@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Datos {
     private static String db = "Mascotas";
     private static String dbUser = "Usuarios";
+    private static String dbAdopciones = "Adopciones";
     private static FirebaseAuth auth = FirebaseAuth.getInstance();
     private static DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -40,5 +41,9 @@ public class Datos {
 
     public static void editarUsuario(Usuario u){
         databaseReference.child(dbUser).child(u.getId()).setValue(u);
+    }
+
+    public static void agregarAdopcion(Adopcion a){
+        databaseReference.child(dbAdopciones).child(a.getId()).setValue(a);
     }
 }

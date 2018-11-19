@@ -2,7 +2,6 @@ package co.com.mypet.mypet;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
 public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHolder> {
     private ArrayList<Mascota> mascotas;
     private Context context;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
    
 
     public MascotaAdapter(ArrayList<Mascota> mascotas, Context ctx) {
@@ -47,7 +44,11 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         holder.buttonAdoptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String id = Datos.getId();
+                String mascota = m.getId();
+                String usuario = auth.getUid();
+                Adopcion a = new Adopcion(id,mascota,usuario);
+                a.adoptar();
                 Toast.makeText(context,"Adoptaras a "+m.getNombre(),Toast.LENGTH_SHORT).show();
             }
         });

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -45,6 +49,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private LinearLayoutManager llm;
     private ArrayList<Mascota> mascotas;
     private DatabaseReference databaseReference;
+    private StorageReference storageReference;
     private String db = "Mascotas";
     private String dbUser = "Usuarios";
     private ProgressDialog progressDialog;
@@ -54,6 +59,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private FirebaseUser user;
     private FirebaseAuth auth;
     private Usuario u;
+    private String fotoUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +76,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         progressDialog = new ProgressDialog(this);
         //mascotas.add(new Mascota("1","Princesa","Chanda","Barranquilla","1 mes","para adopcion","https://firebasestorage.googleapis.com/v0/b/mypet-850a1.appspot.com/o/Miniature-Pinscher-On-White-01.jpg?alt=media&token=18898303-24a5-45f4-a7bd-1c405595b509"));
         final MascotaAdapter mascotaAdapter = new MascotaAdapter(mascotas, this);
-
+        storageReference = FirebaseStorage.getInstance().getReference();
         llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
@@ -120,33 +126,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        /*databaseReference.child(dbUser).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                        u = snapshot.getValue(Usuario.class);
-                        if (u.getId().equals(user.getUid())) {
-                            String uid = snapshot.getKey();
-                            Toast.makeText(getApplicationContext(), "Esta es el Id: " + uid, Toast.LENGTH_SHORT).show();
-                            nombre.setText(u.getNombre());
-                            email.setText(user.getEmail());
-                            Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
-                            break;
-                        }
-                    }
-
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
         databaseReference.child(dbUser).child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -155,7 +135,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     String uid = dataSnapshot.getKey();
                     nombre.setText(u.getNombre());
                     email.setText(user.getEmail());
-                    Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
+
+                    storageReference.child(u.getFoto()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            fotoUrl = uri.toString();
+                            Glide.with(getApplicationContext()).load(uri).into(foto);
+                        }
+                    });
+
                     }
             }
 
@@ -196,7 +184,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         SharedPreferences.Editor editor = getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
         editor.putString("nombre",u.getNombre());
         editor.putString("email", user.getEmail());
-        editor.putString("foto", u.getFoto());
+        editor.putString("foto", fotoUrl);
         editor.putString("segundonombre",u.getSegundoNombre());
         editor.putString("segundoapellido",u.getSegundoApellido());
         editor.putString("apellido",u.getPrimerApellido());
