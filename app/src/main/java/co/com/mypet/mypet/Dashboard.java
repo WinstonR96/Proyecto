@@ -120,16 +120,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        databaseReference.child(dbUser).addValueEventListener(new ValueEventListener() {
+        /*databaseReference.child(dbUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                         u = snapshot.getValue(Usuario.class);
-                        if(u.getId().equals(user.getUid())){
+                        if (u.getId().equals(user.getUid())) {
                             String uid = snapshot.getKey();
-                            Toast.makeText(getApplicationContext(),"Esta es el Id: "+uid,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Esta es el Id: " + uid, Toast.LENGTH_SHORT).show();
                             nombre.setText(u.getNombre());
                             email.setText(user.getEmail());
                             Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
@@ -146,8 +146,24 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
+        databaseReference.child(dbUser).child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    u = dataSnapshot.getValue(Usuario.class);
+                    String uid = dataSnapshot.getKey();
+                    nombre.setText(u.getNombre());
+                    email.setText(user.getEmail());
+                    Glide.with(getApplicationContext()).load(u.getFoto()).into(foto);
+                    }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         }
 
 

@@ -76,4 +76,8 @@ class Usuario {
     public void guardar(){
         Datos.agregarUsuario(this);
     }
+
+    public void editar(){
+        Datos.editarUsuario(this);
+    }
 }
