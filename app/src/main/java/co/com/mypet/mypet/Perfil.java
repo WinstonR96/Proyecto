@@ -160,7 +160,7 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
 
             if(uri != null){
                 foto_profile_U.setImageURI(uri);
-                subirFoto(auth.getUid()+".jpg");
+                //subirFoto(auth.getUid()+".jpg");
 
             }
         }
