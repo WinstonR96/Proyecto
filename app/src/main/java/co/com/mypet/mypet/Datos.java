@@ -10,6 +10,7 @@ public class Datos {
     private static String db = "Mascotas";
     private static String dbUser = "Usuarios";
     private static String dbAdopciones = "Adopciones";
+    private static String dbAyudas = "Ayudas";
     private static FirebaseAuth auth = FirebaseAuth.getInstance();
     private static DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 

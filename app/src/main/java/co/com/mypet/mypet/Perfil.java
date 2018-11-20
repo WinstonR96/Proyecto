@@ -177,22 +177,28 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
             case R.id.donacion:
                 break;
             case R.id.help:
+                ayuda();
                 break;
             case R.id.profile:
-                Perfil();
                 break;
 
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-
     }
 
 
-    public void Perfil(){
+    public void perfil() {
         Intent i = new Intent(this,Perfil.class);
         startActivity(i);
     }
+
+    public void ayuda(){
+       Intent i = new Intent(this,Ayuda.class);
+        startActivity(i);
+    }
+
+
 
     private void logoutRequest() {
         String positivo, negativo;
