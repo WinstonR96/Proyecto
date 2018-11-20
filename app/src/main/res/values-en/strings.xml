@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MyPet</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="usuarioinvalido">Invalid email or password</string>
+    <string name="cargando">Loading</string>
+    <string name="iniciando">Starting</string>
+    <string name="camposvacios">Fill empty fields</string>
+    <string name="longitudinvalida">Password must contain more than 6 characters</string>
+    <string name="registamdo">Registering</string>
+    <string name="usuarioyaexiste">Usuario already exists</string>
+    <string name="registrado">Registered</string>
+    <string name="errorregistrando">Error registering</string>
+    <string name="contraseñanocoinciden">Passwords don\'t match</string>
+    <string name="revisecorreo">Check your email</string>
+    <string name="error">En error occurred</string>
+    <string name="perfil">Profile</string>
+    <string name="donacion">Donate</string>
+    <string name="ayuda">Help</string>
+    <string name="configuracion">Settings</string>
+    <string name="cerrarsesion">Sign off</string>
+    <string name="actualizar">Update</string>
+    <string name="mensaje_cerrar">Do you really want to close session?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="registrese">Sign Up</string>
+    <string name="ingreseemail">Enter Email</string>
+    <string name="ingresecontrasena">Enter Password</string>
+    <string name="repitacontrasena">Repeat Password</string>
+    <string name="registrar">Sign Up</string>
+    <string name="recuperepass">Recover Password</string>
+    <string name="recuperar">Reset</string>
+    <string name="iniciar">Login</string>
+    <string name="iniciarS">Log in</string>
+    <string name="mensajeolvido">Forgot your password? Reset it!</string>
+    <string name="mensajeregistrese">Do not have an account? Sign Up!</string>
+    <string name="seleccionarFoto">Select Photo</string>
+    <string name="actualizado">Updated</string>
+    <string name="primernombre">Name</string>
+    <string name="segundonombre">Middle Name</string>
+    <string name="primerapellido">Surname</string>
+    <string name="segundoapellido">Last Name</string>
 </resources>
