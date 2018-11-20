@@ -164,6 +164,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             case R.id.donacion:
                 break;
             case R.id.help:
+                ayuda();
                 break;
             case R.id.profile:
                 perfil();
@@ -174,9 +175,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         return true;
     }
 
-    private void perfil() {
+    public void perfil() {
         guardarDatosUsuario();
         Intent i = new Intent(this,Perfil.class);
+        startActivity(i);
+    }
+
+    public void ayuda(){
+        Intent i = new Intent(this,Ayuda.class);
         startActivity(i);
     }
 
