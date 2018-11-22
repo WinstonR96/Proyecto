@@ -3,9 +3,7 @@ package co.com.mypet.mypet.core;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
-
 import co.com.mypet.mypet.modelos.Adopcion;
 import co.com.mypet.mypet.modelos.Mascota;
 import co.com.mypet.mypet.modelos.Usuario;
@@ -14,7 +12,6 @@ public class Datos {
     private static String db = "Mascotas";
     private static String dbUser = "Usuarios";
     private static String dbAdopciones = "Adopciones";
-    private static String dbAyudas = "Ayudas";
     private static FirebaseAuth auth = FirebaseAuth.getInstance();
     private static DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 

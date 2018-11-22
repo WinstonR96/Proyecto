@@ -18,14 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import co.com.mypet.mypet.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,9 +34,8 @@ public class Donaciones extends AppCompatActivity implements NavigationView.OnNa
     private View navHeader;
     private FirebaseUser user;
     private FirebaseAuth auth;
-    private String nombreU, emailU, fotoU, snombreU, sapellidoU, apellidoU;
+    private String nombreU, emailU, fotoU;
     private SharedPreferences sharedPreferences;
-    private CircleImageView foto_profile_U;
     private StorageReference storageReference;
     private TextView nombre, email;
     private ImageView foto;
@@ -52,6 +49,9 @@ public class Donaciones extends AppCompatActivity implements NavigationView.OnNa
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
+
+
         storageReference = FirebaseStorage.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -73,9 +73,6 @@ public class Donaciones extends AppCompatActivity implements NavigationView.OnNa
         nombreU = sharedPreferences.getString("nombre", "");
         emailU = sharedPreferences.getString("email", "");
         fotoU = sharedPreferences.getString("foto", "");
-        snombreU = sharedPreferences.getString("segundonombre", "");
-        apellidoU = sharedPreferences.getString("apellido", "");
-        sapellidoU = sharedPreferences.getString("segundoapellido", "");
 
 
         navHeader = navigationView.getHeaderView(0);

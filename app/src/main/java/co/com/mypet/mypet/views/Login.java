@@ -15,12 +15,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 import co.com.mypet.mypet.R;
 import co.com.mypet.mypet.core.Metodos;
 
@@ -39,16 +37,24 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        obtenerSharedPreferences();
-        resources = this.getResources();
         checksesion = findViewById(R.id.checksesion);
         recuperar = findViewById(R.id.tvRecuperarPassword);
         registrar = findViewById(R.id.tvRegistrarUser);
         btLogIn = findViewById(R.id.btLogIn);
         txtemail = findViewById(R.id.etUserLogin);
         txtpass = findViewById(R.id.etPasswordLogin);
+
+        obtenerSharedPreferences();
+
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
+
+
+
+        resources = this.getResources();
+
+
+
         recuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

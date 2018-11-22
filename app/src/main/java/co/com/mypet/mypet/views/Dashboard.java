@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,9 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
-
 import co.com.mypet.mypet.core.Datos;
 import co.com.mypet.mypet.modelos.Mascota;
 import co.com.mypet.mypet.adapter.MascotaAdapter;
@@ -70,19 +67,25 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        auth = FirebaseAuth.getInstance();
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         recyclerView = findViewById(R.id.lista);
+
+
+
+
+        auth = FirebaseAuth.getInstance();
         resources = this.getResources();
         mascotas = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog = new ProgressDialog(this);
-        //mascotas.add(new Mascota("1","Princesa","Chanda","Barranquilla","1 mes","para adopcion","https://firebasestorage.googleapis.com/v0/b/mypet-850a1.appspot.com/o/Miniature-Pinscher-On-White-01.jpg?alt=media&token=18898303-24a5-45f4-a7bd-1c405595b509"));
         final MascotaAdapter mascotaAdapter = new MascotaAdapter(mascotas, this);
         storageReference = FirebaseStorage.getInstance().getReference();
         llm = new LinearLayoutManager(this);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(mascotaAdapter);
@@ -100,15 +103,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         email = navHeader.findViewById(R.id.tvemailde);
         foto = navHeader.findViewById(R.id.circle_image);
 
-        /*nombre.setText(user.getDisplayName());
-        email.setText(user.getEmail());
-        Glide.with(getApplicationContext()).load(user.getPhotoUrl()).into(foto)*/
-        ;
 
         navigationView.setNavigationItemSelectedListener(this);
-        /*progressDialog.setMessage(resources.getString(R.string.cargando));
-        progressDialog.show();*/
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
 
         databaseReference.child(db).addValueEventListener(new ValueEventListener() {
             @Override

@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,9 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
-
 import co.com.mypet.mypet.modelos.AyudaOb;
 import co.com.mypet.mypet.R;
 import co.com.mypet.mypet.adapter.AyudaAdapter;
@@ -41,7 +38,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Ayuda extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth auth;
-    private String nombreU, emailU, fotoU, snombreU, sapellidoU, apellidoU;
+    private String nombreU, emailU, fotoU;
     private SharedPreferences sharedPreferences;
     private CircleImageView foto_profile_U;
     private StorageReference storageReference;
@@ -63,10 +60,19 @@ public class Ayuda extends AppCompatActivity implements NavigationView.OnNavigat
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        resources = this.getResources();
-        ayuda = new ArrayList<AyudaOb>();
-        auth = FirebaseAuth.getInstance();
         listAyuda = findViewById(R.id.listAyuda);
+
+        resources = this.getResources();
+
+        auth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        ayuda = new ArrayList<AyudaOb>();
+        final AyudaAdapter adapter = new AyudaAdapter(this,ayuda);
+
+        listAyuda.setAdapter(adapter);
+
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_menu);
@@ -74,12 +80,12 @@ public class Ayuda extends AppCompatActivity implements NavigationView.OnNavigat
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        final AyudaAdapter adapter = new AyudaAdapter(this,ayuda);
-        listAyuda.setAdapter(adapter);
+
 
         databaseReference.child(dbAyudas).addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,9 +116,6 @@ public class Ayuda extends AppCompatActivity implements NavigationView.OnNavigat
         nombreU = sharedPreferences.getString("nombre", "");
         emailU = sharedPreferences.getString("email", "");
         fotoU = sharedPreferences.getString("foto", "");
-        snombreU = sharedPreferences.getString("segundonombre", "");
-        apellidoU = sharedPreferences.getString("apellido", "");
-        sapellidoU = sharedPreferences.getString("segundoapellido", "");
 
 
         navHeader = navigationView.getHeaderView(0);

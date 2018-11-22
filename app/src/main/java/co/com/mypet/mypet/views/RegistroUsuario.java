@@ -2,17 +2,14 @@ package co.com.mypet.mypet.views;
 
 import android.app.ProgressDialog;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import co.com.mypet.mypet.R;
 import co.com.mypet.mypet.core.Metodos;
 import co.com.mypet.mypet.modelos.Usuario;
@@ -38,13 +34,15 @@ public class RegistroUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
-        resources = this.getResources();
-        firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         txtEmail = findViewById(R.id.etEmailRe);
         txtPass = findViewById(R.id.etContrasena);
         txtRePass = findViewById(R.id.etReContrasena);
         btnRegistrar = findViewById(R.id.btRegistrar);
+
+        resources = this.getResources();
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {

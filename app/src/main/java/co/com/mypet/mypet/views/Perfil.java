@@ -61,11 +61,9 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
-        resources = this.getResources();
+
         genero = findViewById(R.id.genero);
         toolbar = findViewById(R.id.toolbar);
-        auth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         txtDisplayName = findViewById(R.id.txtDisplayName);
@@ -75,10 +73,18 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
         txtSegundoApellidoPerfil = findViewById(R.id.txtSegundoApellidoPerfil);
         actualizarperfil = findViewById(R.id.actualizarperfil);
         foto_profile_U = findViewById(R.id.foto_profile_U);
-        gen = resources.getStringArray(R.array.genero);
+        sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
 
+
+        gen = resources.getStringArray(R.array.genero);
+        resources = this.getResources();
+        auth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
         ArrayAdapter<String> adapterGenero = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,gen);
         genero.setAdapter(adapterGenero);
+
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_menu);
@@ -86,7 +92,6 @@ public class Perfil extends AppCompatActivity implements NavigationView.OnNaviga
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
 
 
         nombreU = sharedPreferences.getString("nombre", "");

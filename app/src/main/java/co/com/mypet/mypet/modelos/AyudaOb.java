@@ -1,7 +1,5 @@
 package co.com.mypet.mypet.modelos;
 
-import android.graphics.drawable.Drawable;
-
 public class AyudaOb {
     private String id;
     private String title;
