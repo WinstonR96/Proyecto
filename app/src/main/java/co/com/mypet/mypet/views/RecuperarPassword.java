@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.views;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import co.com.mypet.mypet.R;
 
 public class RecuperarPassword extends Activity {
 

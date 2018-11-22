@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lista"
     android:paddingTop="@dimen/margen_superior_lista"
-    tools:context="co.com.mypet.mypet.Dashboard"
+    tools:context="co.com.mypet.mypet.views.Dashboard"
     tools:showIn="@layout/dashboard_contenido"
     android:scrollbars="vertical">
 

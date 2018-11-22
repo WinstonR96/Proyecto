@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.views;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +15,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,10 +27,11 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import co.com.mypet.mypet.R;
+import co.com.mypet.mypet.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Perfil extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

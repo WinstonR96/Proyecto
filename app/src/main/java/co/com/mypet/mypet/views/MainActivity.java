@@ -1,10 +1,11 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.views;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
+import co.com.mypet.mypet.R;
 
 public class MainActivity extends AppCompatActivity {
 

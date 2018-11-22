@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.modelos;
 
 import android.graphics.drawable.Drawable;
 

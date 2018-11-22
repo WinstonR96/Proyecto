@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +14,11 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+
+import co.com.mypet.mypet.modelos.Adopcion;
+import co.com.mypet.mypet.Datos;
+import co.com.mypet.mypet.modelos.Mascota;
+import co.com.mypet.mypet.R;
 
 public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHolder> {
     private ArrayList<Mascota> mascotas;

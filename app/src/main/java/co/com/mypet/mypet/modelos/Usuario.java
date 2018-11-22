@@ -1,6 +1,8 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.modelos;
 
-class Usuario {
+import co.com.mypet.mypet.Datos;
+
+public class Usuario {
     public String foto;
     public String id;
     public String nombre;

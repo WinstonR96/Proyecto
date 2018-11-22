@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.views;
 
 import android.app.ProgressDialog;
 import android.content.res.Resources;
@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import co.com.mypet.mypet.R;
+import co.com.mypet.mypet.Usuario;
 
 public class RegistroUsuario extends AppCompatActivity {
 

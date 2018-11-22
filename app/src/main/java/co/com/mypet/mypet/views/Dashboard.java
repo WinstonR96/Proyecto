@@ -1,6 +1,5 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.views;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +36,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+
+import co.com.mypet.mypet.Datos;
+import co.com.mypet.mypet.modelos.Mascota;
+import co.com.mypet.mypet.adapter.MascotaAdapter;
+import co.com.mypet.mypet.R;
+import co.com.mypet.mypet.modelos.Usuario;
 
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
