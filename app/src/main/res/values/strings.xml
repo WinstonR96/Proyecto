@@ -40,4 +40,5 @@
     <string name="segundonombre">Segundo nombre</string>
     <string name="primerapellido">Primer apellido</string>
     <string name="segundoapellido">Segundo apellido</string>
+    <string name="dinero">Dinero</string>
 </resources>

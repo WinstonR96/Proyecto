@@ -25,7 +25,8 @@
         <activity android:name=".views.RegistroUsuario" />
         <activity android:name=".views.Dashboard" />
         <activity android:name=".views.Perfil" />
-        <activity android:name=".views.Ayuda"></activity>
+        <activity android:name=".views.Ayuda" />
+        <activity android:name=".Donaciones"></activity>
     </application>
 
 </manifest>
