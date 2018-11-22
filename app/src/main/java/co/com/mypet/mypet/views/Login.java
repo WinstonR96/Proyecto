@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.com.mypet.mypet.R;
+import co.com.mypet.mypet.core.Metodos;
 
 public class Login extends Activity {
 
@@ -73,6 +74,8 @@ public class Login extends Activity {
                 String pass = txtpass.getText().toString().trim();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)) {
                     Toast.makeText(getApplicationContext(), resources.getString(R.string.camposvacios), Toast.LENGTH_SHORT).show();
+                }else if(!Metodos.validarEmail(email)){
+                    Toast.makeText(getApplicationContext(), resources.getString(R.string.correoinvalido), Toast.LENGTH_SHORT).show();
                 } else {
                     progressDialog.setMessage(resources.getString(R.string.iniciando));
                     progressDialog.show();

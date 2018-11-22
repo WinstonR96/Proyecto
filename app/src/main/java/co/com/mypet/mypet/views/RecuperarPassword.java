@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.com.mypet.mypet.R;
+import co.com.mypet.mypet.core.Metodos;
 
 public class RecuperarPassword extends Activity {
 
@@ -35,8 +36,10 @@ public class RecuperarPassword extends Activity {
             @Override
             public void onClick(View v) {
                 String email = etEmailRecuperar.getText().toString().trim();
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(getApplicationContext(),resources.getString(R.string.camposvacios),Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), resources.getString(R.string.camposvacios), Toast.LENGTH_SHORT).show();
+                }else if(Metodos.validarEmail(email)){
+                    Toast.makeText(getApplicationContext(), resources.getString(R.string.correoinvalido), Toast.LENGTH_SHORT).show();
                 }else{
                     firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

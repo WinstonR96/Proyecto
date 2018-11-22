@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import co.com.mypet.mypet.R;
+import co.com.mypet.mypet.core.Metodos;
 import co.com.mypet.mypet.modelos.Usuario;
 
 public class RegistroUsuario extends AppCompatActivity {
@@ -54,11 +55,13 @@ public class RegistroUsuario extends AppCompatActivity {
                 String repass = txtRePass.getText().toString().trim();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(repass)) {
                     Toast.makeText(getApplicationContext(), resources.getString(R.string.camposvacios), Toast.LENGTH_SHORT).show();
-                } else {
-                    if (pass.length() < 6) {
+                } else if(!Metodos.validarEmail(email)) {
+                    Toast.makeText(getApplicationContext(), resources.getString(R.string.correoinvalido), Toast.LENGTH_SHORT).show();
+                }else{
+                    if (!Metodos.ValidarLongitudPassword(pass)) {
                         Toast.makeText(getApplicationContext(), resources.getString(R.string.longitudinvalida), Toast.LENGTH_SHORT).show();
                     } else {
-                        if (pass.equals(repass)) {
+                        if (!Metodos.ValidarPasswordIguales(pass,repass)) {
                             progressDialog.setMessage(resources.getString(R.string.registamdo));
                             progressDialog.show();
                             firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

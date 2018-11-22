@@ -47,6 +47,7 @@
     <string name="mujer">Femenino</string>
     <string name="anuncio">Advertencia</string>
     <string name="mensaje_advertencia">Funcionalidad en desarrollo</string>
+    <string name="correoinvalido">Email no valido</string>
     <string-array name="genero">
         <item>@string/hombre</item>
         <item>@string/mujer</item>
