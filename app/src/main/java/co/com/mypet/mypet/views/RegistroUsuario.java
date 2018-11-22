@@ -22,7 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import co.com.mypet.mypet.R;
-import co.com.mypet.mypet.Usuario;
+import co.com.mypet.mypet.modelos.Usuario;
 
 public class RegistroUsuario extends AppCompatActivity {
 

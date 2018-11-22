@@ -41,4 +41,14 @@
     <string name="primerapellido">Primer apellido</string>
     <string name="segundoapellido">Segundo apellido</string>
     <string name="dinero">Dinero</string>
+    <string name="mantenersesion">Mantener Sesion</string>
+    <string name="ok">Ok</string>
+    <string name="hombre">Masculino</string>
+    <string name="mujer">Femenino</string>
+    <string name="anuncio">Advertencia</string>
+    <string name="mensaje_advertencia">Funcionalidad en desarrollo</string>
+    <string-array name="genero">
+        <item>@string/hombre</item>
+        <item>@string/mujer</item>
+    </string-array>
 </resources>

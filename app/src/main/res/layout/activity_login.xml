@@ -70,6 +70,17 @@
             android:textSize="20sp"
             android:background="@drawable/button_bg"
             android:text="@string/iniciarS" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50px" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/mantenersesion"
+            android:id="@+id/checksesion"
+            android:checked="true"/>
 
         <Space
             android:layout_width="match_parent"

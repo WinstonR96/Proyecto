@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 import co.com.mypet.mypet.modelos.Adopcion;
-import co.com.mypet.mypet.Datos;
+import co.com.mypet.mypet.core.Datos;
 import co.com.mypet.mypet.modelos.Mascota;
 import co.com.mypet.mypet.R;
 

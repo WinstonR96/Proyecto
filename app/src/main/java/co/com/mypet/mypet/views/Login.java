@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ public class Login extends Activity {
     private SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-
+    private CheckBox checksesion;
     private Resources resources;
 
     @Override
@@ -39,6 +40,7 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
         obtenerSharedPreferences();
         resources = this.getResources();
+        checksesion = findViewById(R.id.checksesion);
         recuperar = findViewById(R.id.tvRecuperarPassword);
         registrar = findViewById(R.id.tvRegistrarUser);
         btLogIn = findViewById(R.id.btLogIn);
@@ -69,23 +71,28 @@ public class Login extends Activity {
             public void onClick(View view) {
                 String email = txtemail.getText().toString().trim();
                 String pass = txtpass.getText().toString().trim();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)){
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)) {
                     Toast.makeText(getApplicationContext(), resources.getString(R.string.camposvacios), Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     progressDialog.setMessage(resources.getString(R.string.iniciando));
                     progressDialog.show();
-                    firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                guardarSharedPreferences("Conectado");
+                            if (task.isSuccessful()) {
+                                if(checksesion.isChecked()){
+                                    guardarSharedPreferences("Conectado");
+                                }else{
+                                    guardarSharedPreferences("SinSesion");
+                                }
+
                                 progressDialog.dismiss();
-                                Intent i = new Intent(Login.this,Dashboard.class);
+                                Intent i = new Intent(Login.this, Dashboard.class);
                                 startActivity(i);
                                 finish();
-                            }else {
+                            } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(),resources.getString(R.string.usuarioinvalido), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), resources.getString(R.string.usuarioinvalido), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -96,17 +103,21 @@ public class Login extends Activity {
     }
 
 
-    public void obtenerSharedPreferences(){
-        sharedPreferences = getSharedPreferences("userInfo",Context.MODE_PRIVATE);
-        String estado = sharedPreferences.getString("Estado_Conexion"," ");
-        if(estado.equals(("Conectado"))){
+    public void obtenerSharedPreferences() {
+        sharedPreferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String estado = sharedPreferences.getString("Estado_Conexion", " ");
+        if (estado.equals(("Conectado"))) {
             Intent i = new Intent(this, Dashboard.class);
             startActivity(i);
             finish();
+        }else{
+            SharedPreferences.Editor editor = getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
+            editor.clear();
+            editor.apply();
         }
     }
 
-    public void guardarSharedPreferences(String estado){
+    public void guardarSharedPreferences(String estado) {
         SharedPreferences.Editor editor = getSharedPreferences("userInfo", MODE_PRIVATE).edit();
         editor.putString("Estado_Conexion", estado);
         editor.apply();

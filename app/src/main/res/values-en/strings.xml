@@ -41,4 +41,11 @@
     <string name="segundonombre">Middle Name</string>
     <string name="primerapellido">Surname</string>
     <string name="segundoapellido">Last Name</string>
+    <string name="dinero">Money</string>
+    <string name="mantenersesion">Keep Sesion</string>
+    <string name="ok">Ok</string>
+    <string name="hombre">Male</string>
+    <string name="mujer">Female</string>
+    <string name="anuncio">Warning</string>
+    <string name="mensaje_advertencia">Functionality in development</string>
 </resources>
