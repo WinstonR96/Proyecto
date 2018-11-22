@@ -1,6 +1,6 @@
 package co.com.mypet.mypet.modelos;
 
-import co.com.mypet.mypet.Datos;
+import co.com.mypet.mypet.core.Datos;
 
 public class Usuario {
     public String foto;
@@ -9,18 +9,20 @@ public class Usuario {
     public String primerApellido;
     public String segundoApellido;
     public String segundoNombre;
+    public String genero;
 
 
     public Usuario() {
     }
 
-    public Usuario(String foto, String id, String nombre, String primerApellido, String segundoApellido, String segundoNombre) {
+    public Usuario(String foto, String id, String nombre, String primerApellido, String segundoApellido, String segundoNombre, String genero) {
         this.foto = foto;
         this.id = id;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.segundoNombre = segundoNombre;
+        this.genero = genero;
     }
 
     public Usuario(String id){
@@ -65,6 +67,14 @@ public class Usuario {
 
     public void setSegundoApellido(String segundoApellido) {
         this.segundoApellido = segundoApellido;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public String getSegundoNombre() {

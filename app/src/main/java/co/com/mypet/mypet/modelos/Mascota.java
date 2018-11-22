@@ -1,6 +1,6 @@
 package co.com.mypet.mypet.modelos;
 
-import co.com.mypet.mypet.Datos;
+import co.com.mypet.mypet.core.Datos;
 
 public class Mascota {
     private String id;

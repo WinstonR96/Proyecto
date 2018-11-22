@@ -37,7 +37,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-import co.com.mypet.mypet.Datos;
+import co.com.mypet.mypet.core.Datos;
 import co.com.mypet.mypet.modelos.Mascota;
 import co.com.mypet.mypet.adapter.MascotaAdapter;
 import co.com.mypet.mypet.R;
@@ -64,6 +64,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private FirebaseAuth auth;
     private Usuario u;
     private String fotoUrl;
+    private String sexo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -101,7 +102,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         /*nombre.setText(user.getDisplayName());
         email.setText(user.getEmail());
-        Glide.with(getApplicationContext()).load(user.getPhotoUrl()).into(foto)*/;
+        Glide.with(getApplicationContext()).load(user.getPhotoUrl()).into(foto)*/
+        ;
 
         navigationView.setNavigationItemSelectedListener(this);
         /*progressDialog.setMessage(resources.getString(R.string.cargando));
@@ -113,8 +115,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mascotas.clear();
 
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Mascota p = snapshot.getValue(Mascota.class);
                         mascotas.add(p);
                     }
@@ -134,11 +136,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         databaseReference.child(dbUser).child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     u = dataSnapshot.getValue(Usuario.class);
                     String uid = dataSnapshot.getKey();
                     nombre.setText(u.getNombre());
                     email.setText(user.getEmail());
+                    sexo = u.getGenero();
 
                     storageReference.child(u.getFoto()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
@@ -147,8 +150,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                             Glide.with(getApplicationContext()).load(uri).into(foto);
                         }
                     });
+                    guardarDatosUsuario();
 
-                    }
+                }
             }
 
             @Override
@@ -156,16 +160,29 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
             }
         });
-        }
+    }
+
+    public void guardarDatosUsuario() {
+        SharedPreferences.Editor editor = getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
+        editor.putString("nombre", u.getNombre());
+        editor.putString("email", user.getEmail());
+        editor.putString("foto", u.getFoto());
+        editor.putString("segundonombre", u.getSegundoNombre());
+        editor.putString("segundoapellido", u.getSegundoApellido());
+        editor.putString("apellido", u.getPrimerApellido());
+        editor.putString("sexo", sexo);
+        editor.apply();
+    }
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.logout:
                 logoutRequest();
                 break;
             case R.id.donacion:
+                donaciones();
                 break;
             case R.id.help:
                 ayuda();
@@ -180,27 +197,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     public void perfil() {
-        guardarDatosUsuario();
-        Intent i = new Intent(this,Perfil.class);
+        Intent i = new Intent(this, Perfil.class);
         startActivity(i);
     }
 
-    public void ayuda(){
-        Intent i = new Intent(this,Ayuda.class);
+    public void ayuda() {
+        Intent i = new Intent(this, Ayuda.class);
         startActivity(i);
     }
 
-    public void guardarDatosUsuario(){
-        SharedPreferences.Editor editor = getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
-        editor.putString("nombre",u.getNombre());
-        editor.putString("email", user.getEmail());
-        editor.putString("foto", fotoUrl);
-        editor.putString("segundonombre",u.getSegundoNombre());
-        editor.putString("segundoapellido",u.getSegundoApellido());
-        editor.putString("apellido",u.getPrimerApellido());
-        editor.apply();
-
+    public void donaciones() {
+        Intent i = new Intent(this, Donaciones.class);
+        startActivity(i);
     }
+
 
     private void logoutRequest() {
         String positivo, negativo;
@@ -222,7 +232,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
-        }) ;
+        });
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -231,10 +241,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     private void logout() {
         auth.signOut();
-        SharedPreferences.Editor editor = getSharedPreferences("userInfo",Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.apply();
-        Intent intent = new Intent(this,Login.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
     }

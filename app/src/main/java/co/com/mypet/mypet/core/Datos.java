@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.core;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
