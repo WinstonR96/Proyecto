@@ -1,4 +1,4 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import co.com.mypet.mypet.modelos.AyudaOb;
+import co.com.mypet.mypet.R;
 
 public class AyudaAdapter extends BaseAdapter {
 

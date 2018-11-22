@@ -1,4 +1,6 @@
-package co.com.mypet.mypet;
+package co.com.mypet.mypet.modelos;
+
+import co.com.mypet.mypet.Datos;
 
 public class Adopcion {
     public String id;

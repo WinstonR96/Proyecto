@@ -6,6 +6,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import co.com.mypet.mypet.modelos.Adopcion;
+import co.com.mypet.mypet.modelos.Mascota;
+import co.com.mypet.mypet.modelos.Usuario;
+
 public class Datos {
     private static String db = "Mascotas";
     private static String dbUser = "Usuarios";
